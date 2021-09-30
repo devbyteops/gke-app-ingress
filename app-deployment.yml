@@ -11,8 +11,8 @@ spec:
       app: my-app
   template:
     metadata:
-    labels:
-      app: my-app
+      labels:
+        app: my-app
     spec:
       containers:
         - name: server
@@ -25,7 +25,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: POSTGRES_PASSWORD
-              value: postgresspassword
+              value: postgrespassword
           ports:
             - containerPort: 5432
         - name: redis
@@ -33,5 +33,5 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 6379
-          command: ["redis_server"]
+          command: ["redis-server"]
           args: ["--requirepass", "redispassword"]
