@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+  labels:
+    app: my-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+    labels:
+      app: my-app
+    spec:
+      containers:
+        - name: server
+          image: nginx:1.19-alpine
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+        - name: postgres
+          image: postgres:13.2-alpine
+          imagePullPolicy: Always
+          env:
+            - name: POSTGRES_PASSWORD
+              value: postgresspassword
+          ports:
+            - containerPort: 5432
+        - name: redis
+          image: redis:6.2-alpine
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 6379
+          command: ["redis_server"]
+          args: ["--requirepass", "redispassword"]
